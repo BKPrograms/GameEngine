@@ -24,7 +24,7 @@ public class Game {
         transformer = new Transform();
         material = new Material(new Texture("test.png"), new Vector3F(1, 1, 1), 1, 8);
 
-        if (model.equals("T1")){
+        if (model.equals("S1")){
 
             // Triangle
             Vertex[] vertices = new Vertex[]{new Vertex(new Vector3F(-1, -1, 0), new Vector2F(0, 0)),
