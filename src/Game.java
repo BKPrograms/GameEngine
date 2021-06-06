@@ -1,4 +1,3 @@
-import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 
 public class Game {
@@ -16,7 +15,7 @@ public class Game {
 
     SpotLight s1 = new SpotLight(new PointLight(new BaseLight(new Vector3F(0, 0, 0), 1.5f), new Attenuation(0, 0, 0.1f), new Vector3F(-2, 0, 5f), 30), new Vector3F(1, 1, 1), 0.7f);
 
-    public Game() {
+    public Game(String model) {
 
         shader = PhongShader.getInstance();
         camera = new Camera();
@@ -24,46 +23,54 @@ public class Game {
         Transform.setCamera(camera);
         transformer = new Transform();
         material = new Material(new Texture("test.png"), new Vector3F(1, 1, 1), 1, 8);
-        // Triangle
-//        Vertex[] data = new Vertex[]{new Vertex(new Vector3F(-1, -1, 0), new Vector2F(0, 0)),
-//                new Vertex(new Vector3F(0, 1, 0), new Vector2F(0.5f, 0)),
-//                new Vertex(new Vector3F(1, -1, 0), new Vector2F(1.0f, 0)),
-//                new Vertex(new Vector3F(0, -1 , 1), new Vector2F(0, 0.5f))
-//
-//
-//        }; // Starts at bottom left
-//
-//        int[] indices = new int[]{3, 1, 0,
-//                                  2, 1, 3,
-//                                  0, 1, 2,
-//                                  0, 2, 3}; // order in which we draw vertices
-//
-//
 
-        // Triangle 2:
+        if (model.equals("T1")){
+
+            // Triangle
+            Vertex[] vertices = new Vertex[]{new Vertex(new Vector3F(-1, -1, 0), new Vector2F(0, 0)),
+                    new Vertex(new Vector3F(0, 1, 0), new Vector2F(0.5f, 0)),
+                    new Vertex(new Vector3F(1, -1, 0), new Vector2F(1.0f, 0)),
+                    new Vertex(new Vector3F(0, -1 , 1), new Vector2F(0, 0.5f))
 
 
-//        Vertex[] data = new Vertex[]{new Vertex(new Vector3F(-1.0f, -1.0f, 0.5773f), new Vector2F(0.0f, 0.0f)),
-//                new Vertex(new Vector3F(0.0f, -1.0f, -1.15475f), new Vector2F(0.5f, 0.0f)),
-//                new Vertex(new Vector3F(1.0f, -1.0f, 0.5773f), new Vector2F(1.0f, 0.0f)),
-//                new Vertex(new Vector3F(0.0f, 1.0f, 0.0f), new Vector2F(0.5f, 1.0f))};
-//
-//        int[] indices = {0, 3, 1,
-//                1, 3, 2,
-//                2, 3, 0,
-//                1, 2, 0};
+            }; // Starts at bottom left
+
+            int[] indices = new int[]{3, 1, 0,
+                    2, 1, 3,
+                    0, 1, 2,
+                    0, 2, 3}; // order in which we draw vertices
+
+            mesh = new MyMesh(vertices, indices, true);
+
+        } else if (model.equals("S2")){
+            //Triangle 2:
 
 
-        // Flat Surface / Plane:
-        Vertex[] vertices = new Vertex[]{new Vertex(new Vector3F(-10, 0.0f, -10), new Vector2F(0.0f, 0.0f)),
-                new Vertex(new Vector3F(-10, 0.0f, 10 * 3), new Vector2F(0.0f, 1.0f)),
-                new Vertex(new Vector3F(30, 0.0f, -10), new Vector2F(1.0f, 0.0f)),
-                new Vertex(new Vector3F(30, 0.0f, 30), new Vector2F(1.0f, 1.0f))};
+            Vertex[] vertices = new Vertex[]{new Vertex(new Vector3F(-1.0f, -1.0f, 0.5773f), new Vector2F(0.0f, 0.0f)),
+                    new Vertex(new Vector3F(0.0f, -1.0f, -1.15475f), new Vector2F(0.5f, 0.0f)),
+                    new Vertex(new Vector3F(1.0f, -1.0f, 0.5773f), new Vector2F(1.0f, 0.0f)),
+                    new Vertex(new Vector3F(0.0f, 1.0f, 0.0f), new Vector2F(0.5f, 1.0f))};
 
-        int[] indices = {0, 1, 2,
-                        2, 1, 3};
+            int[] indices = {0, 3, 1,
+                    1, 3, 2,
+                    2, 3, 0,
+                    1, 2, 0};
 
-        mesh = new MyMesh(vertices, indices, true);  // new MyMesh("lamp.obj");
+            mesh = new MyMesh(vertices, indices, true);
+        } else if (model.equals("S3")){
+
+            // Flat Surface / Plane:
+            Vertex[] vertices = new Vertex[]{new Vertex(new Vector3F(-10, 0.0f, -10), new Vector2F(0.0f, 0.0f)),
+                    new Vertex(new Vector3F(-10, 0.0f, 10 * 3), new Vector2F(0.0f, 1.0f)),
+                    new Vertex(new Vector3F(30, 0.0f, -10), new Vector2F(1.0f, 0.0f)),
+                    new Vertex(new Vector3F(30, 0.0f, 30), new Vector2F(1.0f, 1.0f))};
+
+            int[] indices = {0, 1, 2,
+                    2, 1, 3};
+            mesh = new MyMesh(vertices, indices, true);
+        } else {
+            mesh = new MyMesh(model);
+        }
 
         PhongShader.setAmbientLight(new Vector3F(0.1f, 0.1f, 0.1f));
 

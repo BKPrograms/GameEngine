@@ -1,3 +1,6 @@
+import java.util.Scanner;
+
+import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 
 public class Main {
@@ -12,12 +15,12 @@ public class Main {
 
     private Game game;
 
-    public Main() {
+    public Main(String filename) {
 
         System.out.println("OpenGL version: " + RenderUtil.getOpenGLVersion());
         RenderUtil.initGraphics();
         isEngineRunning = false;
-        game = new Game();
+        game = new Game(filename);
 
     }
 
@@ -78,7 +81,7 @@ public class Main {
                 game.update();
 
                 if (fpsCounter >= Time.SECOND){
-                    System.out.println("FPS: " + frames);
+                    // System.out.println("FPS: " + frames);
                     frames = 0;
                     fpsCounter = 0;
                 }
@@ -120,9 +123,15 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println("Enter the model you would like to load (ex: cube.obj). Otherwise enter S1, S2, or S3 for default shapes: ");
+        Scanner myObj = new Scanner(System.in);
+        String modelName = myObj.nextLine();
+
+        System.out.println("Press 'F' to toggle your flashlight and press 'X' when you'd like to exit.");
+
         GameWindow.createWindow(MY_WIDTH, MY_HEIGHT, MY_TITLE);
 
-        Main game = new Main();
+        Main game = new Main(modelName);
 
         game.runGame();
 
