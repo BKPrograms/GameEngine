@@ -67,7 +67,7 @@ public class Game {
 
         PhongShader.setAmbientLight(new Vector3F(0.1f, 0.1f, 0.1f));
 
-        // PhongShader.setDirectionalLight(new DirectionalLight(new BaseLight(new Vector3F(1, 1, 1), 0.8f), new Vector3F(1, 1, 1)));
+        PhongShader.setDirectionalLight(new DirectionalLight(new BaseLight(new Vector3F(1, 1, 1), 0.8f), new Vector3F(1, 1, 1)));
 
         PhongShader.setPointLights(new PointLight[]{p1, p2, p3});
 
