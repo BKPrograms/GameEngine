@@ -81,7 +81,7 @@ public class MyMesh {
         // Normals pointer:
         glVertexAttribPointer(2, 3, GL_FLOAT, false, Vertex.VERTEX_SIZE * 4, 20);
 
-        glDrawArrays(GL_TRIANGLES, 0, size);
+        // glDrawArrays(GL_TRIANGLES, 0, size); Sometimes causes strange issues
 
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
